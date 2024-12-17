@@ -1,0 +1,15 @@
+# rodar após a criação do namespace
+oc adm policy add-role-to-user edit system:serviceaccount:openshift-gitops:argocd-application-controller -n $NAME_SPACE
+oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:argocd-application-controller -n $NAME_SPACE
+
+#ver como vai ficar os manifestos para criação do ApplicationSet
+oc kustomize k8s/kustomize/argocd/base
+
+#ver como vai ficar os manifestos da aplicacação
+oc kustomize k8s/kustomize/app/overlays/prd
+
+#criar ApplicationSet
+oc kustomize k8s/kustomize/argocd/base | oc apply -f -
+
+#verificar os ApplicationSet
+oc get applicationsets.argoproj.io -n openshift-gitops

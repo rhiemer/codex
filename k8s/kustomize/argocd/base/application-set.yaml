@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: codex
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://xxxx/gitops/codex.git
+              revision: HEAD
+              files:
+              - path: k8s/kustomize/argocd/base/application-set-elements.yaml
+          - list:
+              elements: []
+              elementsYaml: "{{ .key.components | toJson }}"
+  template:
+    metadata:
+      name: '{{.name}}'
+      labels:
+        environment: '{{.environment}}'
+        cluster-name: '{{.serverName}}'
+    spec:
+      project: '{{.project}}'
+      source:
+        repoURL: https://xxxx/gitops/codex.git
+        targetRevision: HEAD
+        path: '{{.pathOverlays}}'
+      destination:
+        server: '{{.serverUrl}}'
+        namespace: '{{.namespace}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - PruneLast=true            

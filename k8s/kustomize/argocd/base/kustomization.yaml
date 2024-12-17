@@ -1,0 +1,9 @@
+namespace: openshift-gitops
+transformers:
+  - label-transformer.yaml  
+resources:
+  - git-repo-cred.yaml
+  - git-repository.yaml
+  - project.yaml
+  - application-set.yaml
+

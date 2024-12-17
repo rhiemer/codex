@@ -1,0 +1,12 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: transformer-argocd-application-labels
+labels:
+  application: codex
+fieldSpecs:
+- path: metadata/labels
+  create: true  
+- kind: ApplicationSet
+  path: spec/template/metadata/labels
+  create: true

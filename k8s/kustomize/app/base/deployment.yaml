@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: codex
+  name: codex
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  template:
+    spec:
+      containers:
+        image: registro/codex

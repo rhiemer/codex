@@ -1,0 +1,13 @@
+images:
+- name: registro/codex
+  newTag: '1411031553'
+namespace: codex-prd
+patches:
+- path: configmap.yaml
+- path: deployment.yaml
+- path: route.yaml
+resources:
+- ../../base
+transformers:
+- transformer-labels-environment.yaml
+

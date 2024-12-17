@@ -1,0 +1,9 @@
+key:
+  components:    
+    - name: codex-prd
+      namespace: codex-prd
+      project: codex
+      environment: prd
+      serverName: in-cluster
+      serverUrl: https://kubernetes.default.svc
+      pathOverlays: k8s/kustomize/app/overlays/prd

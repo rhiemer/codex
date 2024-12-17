@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-repository-codex
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  url: https://xxxx/gitops/codex.git
+  type: git
+  username: argocd
+  password: oauth2:<acess token para o projeto ou excluir username e password caso use o repo-creds>

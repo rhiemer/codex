@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-repo-creds-codex
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  url: https://xxxx
+  type: git
+  insecure: "true"
+  username: argocd
+  password: oauth2:<acess token global para todos os projetos>
+ 
